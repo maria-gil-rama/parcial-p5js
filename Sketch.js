@@ -1,38 +1,52 @@
+var posX, posY, velX, velY, vosX, vosY;
+
 function setup() {
   createCanvas(512, 512);
   background(150);
+  posX = (50, width / 2);
+  posY = (50, height - 50);
 
-  //lineas verticales
-  line(60, 500, 211, 270);
-  line(321, 270, 390, 500);
-  line(166, 500, 247, 270);
-  line(281, 270, 307, 500);
+  vosX = (50, width / 2);
+vosY = (50, height - 50);
 
-  //lineas horizontales
-  line(79, 408, 405, 408);
-  line(140, 340, 370, 340);
-  line(173, 300, 346, 300);
-  line(200, 270, 330, 270);
+//velocidades
+  velX = 9; 
+  velY = 3;
+}
 
-  //rectangulos
-  fill(50);
-  noStroke();
-  quad(197, 407, 298, 407, 309, 512, 161, 512);
-  quad(165, 340, 222, 339, 198, 408, 120, 408);
-  quad(289, 339, 342, 339, 363, 408, 296, 408);
-  quad(236, 300, 286, 300, 290, 340, 220, 340);
-  quad(211, 270, 248, 270, 237, 300, 190, 300);
-  quad(281, 270, 321, 270, 330, 300, 283, 300);
+function draw() {
+  background(150, 5);
 
-  //triangulo
-  stroke(2);
+  push();
   noFill();
-  triangle(94, 167, 122, 184, 101, 205);
-  triangle(210, 95, 230, 106, 184, 149);
-  triangle(323, 147, 332, 159, 346, 146);
-  triangle(270, 179, 239, 215, 265, 215);
-  triangle(384, 85, 410, 112, 380, 134);
-  triangle(245, 30, 280, 40, 260, 70); 
-  triangle(300, 185, 325, 112, 340, 134);
+  rect(posX, posY, 40, 40);
+
+  posX = posX + velX;
+  posY = posY + velY;
+
+  if (posX > width || posX < 0) {
+    velX *= -1;
+  } //no sale en lo alto
+
+  if (posY > height || posY < 0) {
+    velY *= -1;
+  } //no sale en el ancho
+
+  pop();
+
+ push();
+  rect(vosX, vosY, 40, 40);
+
+  vosX = vosX + velX;
+  vosY = vosY + velY;
+
+  if (vosX > width || vosX < 0) {
+    velX *= -1;
+  }
+
+  if (vosY > height || vosY < 0) {
+    velY *= -1;
+  }
+  pop();
   
 }
